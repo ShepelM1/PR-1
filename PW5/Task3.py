@@ -17,7 +17,7 @@ class Student(Human):
         return self.list_grades.append(grade)
 
     def average_grade(self):
-        return sum([x for x in self.list_grades])/len(self.list_grades)
+        return sum(self.list_grades)/len(self.list_grades)
 
 
 human = Human("Kolya", 18)
