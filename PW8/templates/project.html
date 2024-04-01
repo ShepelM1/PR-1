@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Назва проекту</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{{ project_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <header>
-        <h1>Назва проекту {{ project_id }}</h1>
+        <h1>{{ project_name }}</h1>
     </header>
-    <main>
-        <img src="{{ url_for('static', filename='project_image.jpg') }}" alt="Зображення проекту">
-        <p>Технології: Технології, що використовувались</p>
-        <p><a href="https://github.com/repository">Посилання на репозиторій</a></p>
+    <main class="container">
+        <section>
+            <a href="/">
+                <img src="{{ url_for('static', filename='images/home-icon.png') }}" alt="Home" width="48" height="48">
+            </a>
+            <img src="{{ url_for('static', filename=image + '.png') }}" alt="Project Image" width="600" height="400">
+            <p>Technologies Used: {{ technologies }}</p>
+            <p><a href="{{ repository_link }}">Link to Repository</a></p>
+        </section>
     </main>
 </body>
 </html>
