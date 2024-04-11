@@ -14,6 +14,7 @@ api = Api(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
@@ -30,6 +31,7 @@ class User(db.Model):
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.password}')"
+
 
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -51,6 +53,7 @@ class Book(db.Model):
     def __repr__(self):
         return f"Book('{self.title}', '{self.author}', '{self.publication_year}', '{self.category_id}')"
 
+
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
@@ -64,23 +67,32 @@ class Category(db.Model):
     def __repr__(self):
         return f"Category('{self.name}')"
 
+
 class UserResource(Resource):
     def get(self, user_id):
         current_user = User.query.get(user_id)
         return current_user.serialize()
-api.add_resource(UserResource, '/users/<int:user_id>')    
+
+
+api.add_resource(UserResource, '/users/<int:user_id>')
+
 
 class BooksResource(Resource):
     def get(self, book_id):
         current_book = Book.query.get(book_id)
         return current_book.serialize()
-api.add_resource(BooksResource, '/books/<int:book_id>')           
+
+
+api.add_resource(BooksResource, '/books/<int:book_id>')
+
 
 class CategoryResource(Resource):
     def get(self, category_id):
         current_category = Category.query.get(category_id)
         return current_category.serialize()
-api.add_resource(CategoryResource, '/categories/<int:category_id>')   
+
+
+api.add_resource(CategoryResource, '/categories/<int:category_id>')
 
 if __name__ == "__main__":
     app.run(debug=True)
